@@ -15,7 +15,8 @@ import
         MDBValidationItem,
     }
     from 'mdb-react-ui-kit';
-
+    import {createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
+    import {auth} from "./Fire"
 function Register ()
 {
     const [ reguser, setregUser ] = useState( {} );
@@ -30,13 +31,20 @@ function Register ()
         else setError( "Password NotMatched" );
     }
 
-    const submit = e =>
+    const submit =async  e =>
     {
         e.preventDefault();
         if ( verify() )
         {
             const { confimpassword, ...others } = reguser;
-            console.log(others);
+            try {
+                const reg = await createUserWithEmailAndPassword( auth, others?.email, others?.password );
+                await sendEmailVerification( reg.user );
+                console.log(reg.user);
+            } catch (error) {
+                console.error(error.code);
+            }
+            
         }
     }
     return (

@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+
 import { Image } from "react-bootstrap";
 
 function Login() {
@@ -18,13 +19,12 @@ function Login() {
     else return true;
   
   }
-  const  onSubmit = e =>
+  const  onSubmit = async e =>
   {
     e.preventDefault();
     try {
       if ( validate() )
       {
-        alert( "Hi" );
       }
     } catch (err) {
       SetError( err.message );
