@@ -1,13 +1,12 @@
 // @ts-nocheck
 import React from 'react';
-import {reset} from '../../DataStorage/User'
+import "./login.css"
 function Login ()
 {
 
-  return (<button onClick={async () =>
-  {
-    await reset();
-  }}>Hello</button>);
+  return (<div className='login'>
+dfdf
+  </div>);
 }
 
 export default Login;
