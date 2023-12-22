@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyCu_Datl4mamXPpORsCsw1INNlcQUO_GGQ",
-    authDomain: "usermanagementsystem-40d05.firebaseapp.com",
-    projectId: "usermanagementsystem-40d05",
-    storageBucket: "usermanagementsystem-40d05.appspot.com",
-    messagingSenderId: "272361030014",
-    appId: "1:272361030014:web:7ba048175c7ae7386b332f",
-    measurementId: "G-PBBECWSN01"
+     apiKey: "AIzaSyA0raXbdHpDUyiLHEDSPNM_n5uqmv38FLU",
+         authDomain: "fir-authreactapp-3f4ab.firebaseapp.com",
+         projectId: "fir-authreactapp-3f4ab",
+         storageBucket: "fir-authreactapp-3f4ab.appspot.com",
+         messagingSenderId: "741562299225",
+         appId: "1:741562299225:web:c4ac7bf337419a7c2b5248",
+         measurementId: "G-9MTMQ6CKXH"
 };
