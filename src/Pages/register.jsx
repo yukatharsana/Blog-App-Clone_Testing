@@ -16,7 +16,7 @@ import
     }
     from 'mdb-react-ui-kit';
     import {createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
-    import {auth} from "./Fire"
+    import {auth} from "../DataStorage/Fire"
 function Register ()
 {
     const [ reguser, setregUser ] = useState( {} );
@@ -44,7 +44,7 @@ function Register ()
             } catch (error) {
                 console.error(error.code);
             }
-            
+
         }
     }
     return (
