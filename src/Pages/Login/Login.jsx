@@ -23,7 +23,7 @@ if (form.checkValidity() === false) {
   {
 
   }
-  return (<Container fluid className='d-flex justify-content-center align-items-center '>
+  return (<Container fluid className='d-flex justify-content-center align-items-center'>
     <Form method='post' noValidate validated={validated}  onSubmit={OnSubmit}>
       <ValidateInput name='user' onChange={OnChange} required={true} />
 <Button type='submit'>Login</Button>
