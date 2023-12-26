@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "./style/index.css"
-import Router from './Pages/Routing'
+
+import App from './App'
+import MainContextProvider from './Context/MainContext';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
- <Router/>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <MainContextProvider>
+    <App/>
+    </MainContextProvider>
+
+  // </React.StrictMode>
 );
