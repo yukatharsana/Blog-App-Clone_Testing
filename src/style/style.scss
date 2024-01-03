@@ -1,0 +1,49 @@
+$lightgreen:#b9e7e7;
+.app{
+    .container{
+        //Login && Registation
+        .auth{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: $lightgreen;
+            flex-direction: column;
+        }
+        h1{
+            font-size: 20px;
+            color: teal;
+            margin-bottom: 20px;
+        }
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #fff;
+    width: 200px;
+    gap: 20px;
+}
+input{
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid gray;
+
+}
+button{
+    cursor: pointer;
+background-color: teal;
+padding: 10px;
+color: #fff;
+border: none;
+}
+span{
+    font-size: 12px;
+    text-align: center;
+}
+p{
+    text-align: center;
+    color: red;
+    font-size: 12px;
+}
+    }
+}
