@@ -1,9 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default function Register() {
+export default function Register () {
   return (
-    <div>
-      
+    <div className='auth'>
+      <h1>Register</h1>
+      <form action=''>
+        <input type='text' placeholder='username' name='username' id='user' />
+        <input type='email' placeholder='email' name='email' id='email' />
+
+        <input type='password' name='password' placeholder='password' id='password'/>
+        <button>Register</button>
+        <p>Error !</p>
+        <span>
+          Do you have an account? <Link to='/login'>Login</Link>
+        </span>
+      </form>
     </div>
   )
 }
