@@ -8,6 +8,7 @@ import Single from './pages/Single'
 import NavBar from './component/NavBar'
 import Footer from './component/Footer'
 import './style/style.scss'
+import 'react-quill/dist/quill.snow.css'
 const Layout = () => {
   return (
     <>

@@ -12,7 +12,7 @@ export default function NavBar () {
           <Link to='' className='link'>
             <h6>ART</h6>
           </Link>
-          <Link  className='link' to='/?cat=art'>
+          <Link  className='link' to='/?cat=science'>
             <h6>SCINCE</h6>
           </Link>
           <Link to='/?cat=tec' className='link'>
