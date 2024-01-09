@@ -1,5 +1,5 @@
 $ligthcolor:#dfc863;
-$verylight :#4c4833a9;
+$verylight :#c1af55c1;
 $darkcolor :rgb(175, 137, 32);
 
 .app {
@@ -94,8 +94,8 @@ $darkcolor :rgb(175, 137, 32);
 
                     .links {
                         padding    : 0px 20px;
-                        color      : #fff;
-                        text-shadow: $darkcolor 1px 1px 1px;
+                        color:red;
+                        font-weight: 900;
                     }
 
                 }
