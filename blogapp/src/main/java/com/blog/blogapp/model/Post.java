@@ -20,4 +20,6 @@ private int postid;
 private String title;
     @Column(name="description")
 private String description;
+    @Column(name="userid",nullable = false)
+    private int userid;
 }

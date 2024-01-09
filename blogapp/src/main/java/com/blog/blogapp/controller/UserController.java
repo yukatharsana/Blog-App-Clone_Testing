@@ -27,5 +27,5 @@ return userRepo.save(user);
                 .orElseThrow(()->new RuntimeException("Employee not exist with id"+userid));
         return ResponseEntity.ok(user);
     }
-    public  ResponseEntity<Users> updateUsers()
+
 }

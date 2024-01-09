@@ -9,10 +9,11 @@ export default function Register () {
         <input type='text' placeholder='username' name='username' id='user' />
         <input type='email' placeholder='email' name='email' id='email' />
         <input type='password' name='password' placeholder='password' id='password'/>
-        <button>Register</button>
+        <button type='submit'>Register</button>
         <p>Error !</p>
         <span>
-          Do you have an account? <Link to='/login'>Login</Link>
+          Do you have an account? <Link to='/login' className = 'action link'
+>Login</Link>
         </span>
       </form>
     </div>
