@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Register () {
+export default function Register ()
+{
+  const onsubmit = useCallback(e => {
+  e.preventDefault()
+  try {
+    const registerdata = new FormData(e.currentTarget)
+    const register = Object.fromEntries(registerdata)
+    console.log(register)
+  } catch (error) {}
+}, [])
+
   return (
     <div className='auth'>
       <h1>Register</h1>
-      <form action=''>
+      <form onSubmit={onsubmit}>
         <input type='text' placeholder='username' name='username' id='user' />
         <input type='email' placeholder='email' name='email' id='email' />
         <input type='password' name='password' placeholder='password' id='password'/>

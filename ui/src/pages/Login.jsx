@@ -5,7 +5,15 @@ export default function Login ()
 {
   const onsubmit = useCallback(e=>
   {
-    e.preventDefault()
+    e.preventDefault();
+    try {
+const logindata = new FormData(e.currentTarget)
+const login = Object.fromEntries(logindata)
+      console.log(login);
+    } catch (error) {
+
+    }
+
   },[])
   return (
     <div className='auth'>
