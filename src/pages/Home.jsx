@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Home () {
-  const [posts, setposts] = useState([
+  const posts =[
     {
       url: 'https://api.slingacademy.com/public/sample-photos/1.jpeg',
       title: 'Defense the travel audience hand',
@@ -82,7 +82,7 @@ export default function Home () {
         'Parent talk collection fill between management purpose fish fight real teacher successful me arrive little.',
       id: 10
     }
-  ])
+  ]
   return (
     <div className="home">
     <div className='posts'>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { CiEdit } from 'react-icons/ci'
 import { MdDeleteForever } from "react-icons/md"
+import Menu from '../component/Menu';
 export default function Single() {
   return (
     <div className='single'>
@@ -43,7 +44,7 @@ export default function Single() {
           gdfgdfg
         </p>
       </div>
-      <div className="menu"></div>
+      <Menu/>
     </div>
   )
 }
