@@ -1,9 +1,6 @@
 package com.blog.blogapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +12,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
-public class User {
+public class Users {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int userid;
+    @Column(name="email",nullable = false)
     private String email;
+    @Column(name="password",nullable = false)
     private String password;
+    @Column(name="username")
     private String name;
 }
