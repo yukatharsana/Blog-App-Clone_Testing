@@ -122,7 +122,7 @@ $darkcolor :rgb(175, 137, 32);
                     h6 {
                         font-size  : 16px;
                         font-weight: 300;
-                        transition : ease-in-out .5ms;
+                        transition : ease-in-out 1s;
 
                         &:hover {
                             border-bottom: 2px ridge $darkcolor;
