@@ -1,9 +1,31 @@
-import React from 'react'
-import Logo from '../img/logo.jpg'
+import React, { useEffect, useRef } from 'react'
+import Logo from '../img/logo.png'
 import { Link } from 'react-router-dom'
-export default function NavBar () {
+export default function NavBar ()
+{
+  const navref = useRef(null);
+  useEffect(() =>
+  {
+const handleScroll = () => {
+  if (window.scrollY > 100) {
+    navref.current.classList.add("active")
+  } else {
+   navref.current.classList.remove('active')
+
+  }
+}
+
+window.addEventListener('scroll', handleScroll)
+
+return () => {
+  window.removeEventListener('scroll', handleScroll)
+}
+
+},[])
+
   return (
-    <div className='navbar'>
+    <div
+ className='navbar' ref={navref}>
       <div className='container'>
         <div className='logo'>
           <img src={Logo} alt='logo' />
