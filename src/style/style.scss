@@ -1,15 +1,17 @@
 $lightgreen:#b9e7e7;
 
 .app {
-    display: flex;
+    display        : flex;
     justify-content: center;
-    .link{
+
+    .link {
         text-decoration: none;
-        color: inherit;
+        color          : inherit;
     }
+
     .container {
 
-width: 1024px;
+        width: 1024px;
 
         //Login && Registation
         .auth {
@@ -61,29 +63,33 @@ width: 1024px;
                 font-size : 12px;
             }
         }
-//NavBar
-.navbar{
-    .container{
-        padding: 10px 0px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .logo{
-img{
-    width: 120px;
-}
-        }
-        .links{
 
-            display: flex;
-            gap: 10px;
-            h6{
-                font-size: 16px;
-                font-weight: 300;
+        //NavBar
+        .navbar {
+            .container {
+                padding        : 10px 0px;
+                display        : flex;
+                align-items    : center;
+                justify-content: space-between;
+
+                .logo {
+                    img {
+                        width: 120px;
+                    }
+                }
+
+                .links {
+
+                    display: flex;
+                    gap    : 10px;
+
+                    h6 {
+                        font-size  : 16px;
+                        font-weight: 300;
+                    }
+                }
             }
         }
-    }
-}
 
     }
 }

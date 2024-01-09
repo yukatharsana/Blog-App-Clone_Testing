@@ -8,7 +8,6 @@ export default function Register () {
       <form action=''>
         <input type='text' placeholder='username' name='username' id='user' />
         <input type='email' placeholder='email' name='email' id='email' />
-
         <input type='password' name='password' placeholder='password' id='password'/>
         <button>Register</button>
         <p>Error !</p>
