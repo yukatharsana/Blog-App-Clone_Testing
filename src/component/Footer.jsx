@@ -1,9 +1,13 @@
 import React from 'react'
+import Logo from '../img/logo.jpg'
 
 export default function Footer() {
   return (
-    <div>
-      
-    </div>
+    <footer>
+      <img src={Logo} alt='logo'/>
+      <span>
+        create By ThanuMahee and <b>React && Springboot</b>
+      </span>
+    </footer>
   )
 }

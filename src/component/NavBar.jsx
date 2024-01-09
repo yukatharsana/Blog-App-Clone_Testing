@@ -30,7 +30,7 @@ export default function NavBar () {
           <span>John</span>
           <span>LogOut</span>
           <span className='write'>
-            <Link to='/write'>Write</Link>
+            <Link to='/write' className='link'>Write</Link>
           </span>
         </div>
       </div>
