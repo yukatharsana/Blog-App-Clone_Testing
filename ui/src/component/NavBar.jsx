@@ -28,10 +28,12 @@ return () => {
  className='navbar' ref={navref}>
       <div className='container'>
         <div className='logo'>
-          <img src={Logo} alt='logo' />
+          <Link className='link' to='/'>
+            <img src={Logo} alt='logo' />
+          </Link>
         </div>
         <div className='links'>
-          <Link to='' className='link'>
+          <Link to='/?cat=art' className='link'>
             <h6>ART</h6>
           </Link>
           <Link  className='link' to='/?cat=science'>
