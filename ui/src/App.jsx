@@ -9,6 +9,8 @@ import NavBar from './component/NavBar'
 import Footer from './component/Footer'
 import './style/style.scss'
 import 'react-quill/dist/quill.snow.css'
+import { Provider } from 'react-redux';
+import { store } from './Redux/Store'
 const Layout = () => {
   return (
     <>
@@ -50,12 +52,16 @@ export default function App ()
 {
 
   return (
+<Provider store={store}>
+
+
     <div
  className="app">
       <div className="container">
 <RouterProvider router={router} />
 
       </div>
-    </div>
+      </div>
+      </Provider>
   )
 }
