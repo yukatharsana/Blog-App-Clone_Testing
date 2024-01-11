@@ -56,5 +56,12 @@ public class UserController {
         userRepo.save(u);
         return ResponseEntity.ok(u);
     }
+    @DeleteMapping("{userid}")
+    public int deleteUser(@PathVariable int userid){
+        Users user=userRepo.findById(userid)
+                .orElseThrow(()->new RuntimeException("User not exist with id"+userid));
+        userRepo.deleteById(userid);
+        return userid;
+    }
 
 }

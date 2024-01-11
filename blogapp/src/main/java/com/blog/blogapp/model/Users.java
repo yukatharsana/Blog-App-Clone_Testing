@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name="users")
 public class Users {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int userid;
     @Column(name="email",nullable = false)
     private String email;
