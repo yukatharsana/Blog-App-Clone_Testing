@@ -1,5 +1,7 @@
 import React, { useCallback, useReducer } from 'react'
 import ReactQuill from 'react-quill'
+import {addPost} from "../Redux/Thunk/PostThunk"
+import { useDispatch } from 'react-redux';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'DESC':
@@ -12,7 +14,9 @@ const reducer = (state, action) => {
       return state
   }
 }
-export default function Write () {
+export default function Write ()
+{
+  const Dispatcher = useDispatch();
   const [value, setvalue] = useReducer(reducer, {})
   const onPublished = useCallback(
     e => {
@@ -22,13 +26,28 @@ export default function Write () {
         if (!value?.title || !value?.imgurl || !value?.cat) {
           throw new Error('Title,catogory and image must Required!')
         }
-        console.log(value)
+
       } catch (error) {
         console.error(error)
       }
     },
     [value]
   )
+  const onSave = useCallback(
+  e => {
+    e.preventDefault()
+    try {
+      if (!value?.title || !value?.imgurl || !value?.cat) {
+        throw new Error('Title,catogory and image must Required!')
+      }
+      Dispatcher(addPost(value))
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  [value]
+)
+
   const uploadimage = useCallback(e => {
     setvalue({ type: 'IMGUPD', value: e.target.files[0] })
   }, [])
@@ -80,7 +99,7 @@ export default function Write () {
             Upload Image
           </label>
           <div className='buttons'>
-            <button>Save as A draft</button>
+            <button onClick={onSave}>Save as A draft</button>
             <button onClick={onPublished}>Update</button>
           </div>
         </div>
@@ -103,7 +122,7 @@ export default function Write () {
               onChange={otherChnage}
               value='science'
               id='science'
-            
+
             />
             <label htmlFor='science'>Science</label>
           </div>

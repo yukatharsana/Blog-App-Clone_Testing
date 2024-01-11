@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { postById } from '../Redux/Slice/PostSlice'
 import { Link, useNavigate } from 'react-router-dom'
+import { BolBImage } from './Util';
 
 export default function BigPost ({ postid })
 {
@@ -11,9 +12,9 @@ export default function BigPost ({ postid })
     return (
 
     <div className='post' key={postById}>
-  <div className='img'>
-              <img  src={`data:image/png;base64,${posturl}`}
- alt={title} />
+        <div className='img'>
+          <BolBImage url={posturl} alt={title}/>
+
   </div>
   <div className='content'>
     <Link className='link' to={`/post/${postid}`}>
@@ -22,6 +23,18 @@ export default function BigPost ({ postid })
     <p>{description}</p>
     <button onClick={()=>navigate(`/post/${postid}`)} >Read More</button>
   </div>
+</div>
+
+  )
+}
+export function SmallPost ({ postid })
+{
+  const { posturl, title } = useSelector(state => postById(state, postid)) ?? {};
+  return (
+    <div className='post' key={postid}>
+      <BolBImage url={posturl} alt={title } />
+  <h2>{title}</h2>
+  <button>Read More</button>
 </div>
 
   )

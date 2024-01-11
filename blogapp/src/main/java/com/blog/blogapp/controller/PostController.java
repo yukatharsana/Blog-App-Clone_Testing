@@ -27,12 +27,14 @@ public class PostController {
     public Post addNew(@RequestPart("title") String title,
                        @RequestPart("description") String description,
                        @RequestPart("image")MultipartFile image,
-                       @RequestPart("userid") String userid) throws IOException {
+                       @RequestPart("userid") String userid,
+                       @RequestPart("cat") String category) throws IOException {
         Post post=new Post();
         post.setDescription(description);
         post.setUserid(Integer.parseInt(userid));
         post.setTitle(title);
         post.setPosturl(image.getBytes());
+        post.setCategory(category);
         return postRepo.save(post);
     }
     @GetMapping("/post/{postid}")

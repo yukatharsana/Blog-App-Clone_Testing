@@ -44,7 +44,9 @@ export const updatePost = createAsyncThunk(
 )
 export const addPost = createAsyncThunk(
   'add/addPost',
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) =>
+  {
+    console.log(data);
     try {
       const response = await axios.post(`${Base}`, data, {
         headers: {

@@ -36,4 +36,8 @@ private String description;
     @Column(name = "created_at",updatable = false)
     private Date createdAt;
 
+@Column(name="category",nullable = false)
+   private String category;
+    @Column(name="visible")
+    private String visible;
 }
