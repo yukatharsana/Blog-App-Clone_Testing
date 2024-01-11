@@ -38,6 +38,6 @@ private String description;
 
 @Column(name="category",nullable = false)
    private String category;
-    @Column(name="visible")
-    private String visible;
+    @Column(name="hidden")
+    private boolean hidden=true;
 }

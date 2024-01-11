@@ -13,7 +13,9 @@ $darkcolor :rgb(175, 137, 32);
 
     .container {
 
-        width: 1024px;
+        width          : 1024px;
+        transition     : ease-in-out 1s;
+        scroll-behavior: smooth;
 
         //Login && Registation
         .auth {
