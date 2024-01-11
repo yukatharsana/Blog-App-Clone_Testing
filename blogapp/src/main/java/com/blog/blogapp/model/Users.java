@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name="users")
 public class Users {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private int userid;
     @Column(name="email",nullable = false)
     private String email;
@@ -22,4 +22,7 @@ public class Users {
     private String password;
     @Column(name="username")
     private String name;
+    @Lob
+    @Column(name="profile",columnDefinition = "LONGBLOB")
+    private byte[] profile;
 }

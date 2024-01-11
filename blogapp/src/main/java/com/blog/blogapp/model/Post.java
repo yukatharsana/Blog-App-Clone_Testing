@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name="posts")
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 private int postid;
     @Column(name="title",nullable = false)
 private String title;
@@ -22,4 +22,8 @@ private String title;
 private String description;
     @Column(name="userid",nullable = false)
     private int userid;
+    @Lob
+    @Column(name="imgURL",columnDefinition = "LONGBLOB")
+    private byte[] posturl;
+
 }
