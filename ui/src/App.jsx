@@ -9,8 +9,12 @@ import NavBar from './component/NavBar'
 import Footer from './component/Footer'
 import './style/style.scss'
 import 'react-quill/dist/quill.snow.css'
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 import { store } from './Redux/Store'
+import { getPost } from './Redux/Thunk/PostThunk'
+import { getUser } from './Redux/Thunk/UserThunk'
+store.dispatch(getPost())
+store.dispatch(getUser())
 const Layout = () => {
   return (
     <>
@@ -43,25 +47,20 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
-  }, {
-        path: '/register',
-        element: <Register />
-      }
+  },
+  {
+    path: '/register',
+    element: <Register />
+  }
 ])
-export default function App ()
-{
-
+export default function App () {
   return (
-<Provider store={store}>
-
-
-    <div
- className="app">
-      <div className="container">
-<RouterProvider router={router} />
-
+    <Provider store={store}>
+      <div className='app'>
+        <div className='container'>
+          <RouterProvider router={router} />
+        </div>
       </div>
-      </div>
-      </Provider>
+    </Provider>
   )
 }

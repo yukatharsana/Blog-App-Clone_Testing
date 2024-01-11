@@ -1,12 +1,15 @@
-import {configureStore } from '@reduxjs/toolkit'
-import { thunk } from 'redux-thunk';
+import {Tuple, configureStore } from '@reduxjs/toolkit'
+import  {thunk}  from 'redux-thunk';
 import logger from 'redux-logger'
-import userSlice  from './UserSlice';
+import userSlice  from './Slice/UserSlice';
+import { postSlice } from './Slice/PostSlice';
 
 export const store = configureStore({
     reducer: {
-        user:userSlice
+        user: userSlice,
+        post:postSlice
     },
-    middleware:[logger,thunk]
+    middleware:()=>new Tuple(thunk)
+
 }
 );

@@ -13,15 +13,16 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
     private UserRepo userRepo;
-    @GetMapping
+    @GetMapping("/user")
     public List<Users> getall(){
         return  userRepo.findAll();
     }
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/user",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Users> newUser(@RequestPart("name") String name,
                          @RequestPart("email") String email,
                          @RequestPart("password") String password,
@@ -34,7 +35,7 @@ public class UserController {
         user.setProfile(profile.getBytes());
         return ResponseEntity.ok(userRepo.save(user));
     }
-    @GetMapping("{userid}")
+    @GetMapping("/user/{userid}")
     public ResponseEntity<Users> userById(@PathVariable  int userid){
         Users user=userRepo.findById(userid)
                 .orElseThrow(()->new RuntimeException("User not exist with id"+userid));
@@ -56,7 +57,7 @@ public class UserController {
         userRepo.save(u);
         return ResponseEntity.ok(u);
     }
-    @DeleteMapping("{userid}")
+    @DeleteMapping("/user/{userid}")
     public int deleteUser(@PathVariable int userid){
         Users user=userRepo.findById(userid)
                 .orElseThrow(()->new RuntimeException("User not exist with id"+userid));
