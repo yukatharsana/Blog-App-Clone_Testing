@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { postById } from '../Redux/Slice/PostSlice'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function BigPost ({ postid })
 {
     const { title,description,posturl} = useSelector(state => postById(state, postid))
-console.log(posturl.data);
+  console.log(posturl.data);
+  const navigate=useNavigate()
     return (
 
     <div className='post' key={postById}>
@@ -16,10 +17,10 @@ console.log(posturl.data);
   </div>
   <div className='content'>
     <Link className='link' to={`/post/${postid}`}>
-      <h1>{title} </h1>
+      <h1>{title}</h1>
     </Link>
     <p>{description}</p>
-    <button>Read More</button>
+    <button onClick={()=>navigate(`/post/${postid}`)} >Read More</button>
   </div>
 </div>
 
