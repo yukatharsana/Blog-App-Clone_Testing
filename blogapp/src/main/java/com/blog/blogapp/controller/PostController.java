@@ -5,9 +5,12 @@ import com.blog.blogapp.model.Post;
 import com.blog.blogapp.model.Users;
 import com.blog.blogapp.repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -20,8 +23,16 @@ public class PostController {
     public List<Post> getall(){
         return postRepo.findAll();
     }
-    @PostMapping
-    public Post addNew(@RequestBody Post post){
+    @PostMapping(value = "/post",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Post addNew(@RequestPart("title") String title,
+                       @RequestPart("description") String description,
+                       @RequestPart("image")MultipartFile image,
+                       @RequestPart("userid") String userid) throws IOException {
+        Post post=new Post();
+        post.setDescription(description);
+        post.setUserid(Integer.parseInt(userid));
+        post.setTitle(title);
+        post.setPosturl(image.getBytes());
         return postRepo.save(post);
     }
     @GetMapping("/post/{postid}")

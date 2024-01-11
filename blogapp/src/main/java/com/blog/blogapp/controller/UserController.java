@@ -41,7 +41,7 @@ public class UserController {
                 .orElseThrow(()->new RuntimeException("User not exist with id"+userid));
         return ResponseEntity.ok(user);
     }
-    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "/user",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Users> updateUser(@RequestPart("name") String name,
                                             @RequestPart("email") String email,
                                             @RequestPart("userid") String userid,
