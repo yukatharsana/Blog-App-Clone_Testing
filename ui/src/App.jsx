@@ -11,6 +11,7 @@ import './style/style.scss'
 import 'react-quill/dist/quill.snow.css'
 import { Provider } from 'react-redux'
 import { store } from './Redux/Store'
+import { ToastContainer } from 'react-toastify'
 import { getPost } from './Redux/Thunk/PostThunk'
 import { getUser } from './Redux/Thunk/UserThunk'
 store.dispatch(getPost())
@@ -56,11 +57,15 @@ const router = createBrowserRouter([
 export default function App () {
   return (
     <Provider store={store}>
-      <div className='app'>
+
+
+
+      <div className='app'> <ToastContainer draggable={true } />
         <div className='container'>
           <RouterProvider router={router} />
         </div>
-      </div>
+        </div>
+
     </Provider>
   )
 }

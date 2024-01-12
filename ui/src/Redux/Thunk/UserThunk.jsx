@@ -46,7 +46,7 @@ export const addUser = createAsyncThunk(
   'add/addUser',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${Base}`, data, {
+      const response = await axios.post(Base, data,{
         headers: {
           'Content-Type': 'multi-part/form-data'
         }

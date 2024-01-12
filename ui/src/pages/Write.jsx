@@ -1,7 +1,8 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useMemo, useReducer, useState } from 'react'
 import ReactQuill from 'react-quill'
-import {addPost} from "../Redux/Thunk/PostThunk"
-import { useDispatch } from 'react-redux';
+import { addPost } from '../Redux/Thunk/PostThunk'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'DESC':
@@ -10,22 +11,54 @@ const reducer = (state, action) => {
       return { ...state, imgurl: action.value }
     case 'OTHER':
       return { ...state, [action.payload.name]: action.payload.value }
+    case 'CHOISE':
+      return { ...state, hidden: Boolean(action.payload.value) }
     default:
       return state
   }
 }
-export default function Write ()
-{
-  const Dispatcher = useDispatch();
+export default function Write () {
+  const Dispatcher = useDispatch()
   const [value, setvalue] = useReducer(reducer, {})
+  const [update, setUpdate] = useState(false);
+  const disabled = useMemo(() =>
+  {
+    if (!value?.title || !value?.imgurl || !value?.cat)
+      return true;
+    else
+      return false;
+  },[value])
   const onPublished = useCallback(
     e => {
       e.preventDefault()
       try {
-        console.log(value)
-        if (!value?.title || !value?.imgurl || !value?.cat) {
-          throw new Error('Title,catogory and image must Required!')
-        }
+// Dispatcher(addPost(value))
+
+        setUpdate(false)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    []
+  )
+  const OnMouseOverUpdate = () =>
+  {
+    if (disabled)
+  toast.error('important fields are Empty!', {
+    autoClose: 1500
+  })
+
+  }
+  const onSave = useCallback(
+    e => {
+      e.preventDefault()
+      try
+      {
+        toast.success("Saved Changes", {
+          autoClose:1500
+        })
+
+
 
       } catch (error) {
         console.error(error)
@@ -33,26 +66,24 @@ export default function Write ()
     },
     [value]
   )
-  const onSave = useCallback(
-  e => {
-    e.preventDefault()
-    try {
-      if (!value?.title || !value?.imgurl || !value?.cat) {
-        throw new Error('Title,catogory and image must Required!')
-      }
-      Dispatcher(addPost(value))
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  [value]
-)
+  const choiseBoxChange = useCallback(e => {
+    setvalue({ type: 'CHOISE', payload: e.target })
+    toast.info(`Your Post is Now ${e.target.value ? "Private" : "Public"}`, {
+      autoClose:1500
+    })
+    setUpdate(true)
 
+  }, [])
   const uploadimage = useCallback(e => {
     setvalue({ type: 'IMGUPD', value: e.target.files[0] })
+    toast.success('1 image uploaded', {
+      autoClose:1500
+    })
+    setUpdate(true)
   }, [])
   const otherChnage = useCallback(e => {
     setvalue({ type: 'OTHER', payload: e.target })
+    setUpdate(true)
   }, [])
   return (
     <div className='writeadd'>
@@ -74,6 +105,7 @@ export default function Write ()
             value={value?.description}
             onChange={val => {
               setvalue({ type: 'DESC', value: val })
+              setUpdate(true);
             }}
           />
         </div>
@@ -86,7 +118,12 @@ export default function Write ()
           </span>
           <span>
             Visibility:
-            <b>Public</b>
+            <b>
+              <select name='visible' onChange={choiseBoxChange}>
+                <option value='false'>Public</option>
+                <option value='true'>Private</option>
+              </select>
+            </b>
           </span>
           <input
             type='file'
@@ -99,8 +136,8 @@ export default function Write ()
             Upload Image
           </label>
           <div className='buttons'>
-            <button onClick={onSave}>Save as A draft</button>
-            <button onClick={onPublished}>Update</button>
+            <button onClick={onSave} disabled={!update} >Save as A draft</button>
+            <button onClick={onPublished} onMouseOver={OnMouseOverUpdate} disabled = { disabled } >Update</button>
           </div>
         </div>
         <div className='item'>
@@ -122,7 +159,6 @@ export default function Write ()
               onChange={otherChnage}
               value='science'
               id='science'
-
             />
             <label htmlFor='science'>Science</label>
           </div>

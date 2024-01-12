@@ -38,6 +38,9 @@ private String description;
 
 @Column(name="category",nullable = false)
    private String category;
-    @Column(name="hidden")
-    private boolean hidden=true;
+
+    @Column(name="hidden",columnDefinition = "BOOLEAN DEFAULT true")
+    private boolean hidden;
+    @Column(name="status",columnDefinition = "VARCHAR(30) DEFAULT 'Draft'")
+    private String status;
 }

@@ -28,13 +28,16 @@ public class PostController {
                        @RequestPart("description") String description,
                        @RequestPart("image")MultipartFile image,
                        @RequestPart("userid") String userid,
-                       @RequestPart("cat") String category) throws IOException {
+                       @RequestPart("cat") String category,
+    @RequestPart("hidden") boolean hidden
+    ) throws IOException {
         Post post=new Post();
         post.setDescription(description);
         post.setUserid(Integer.parseInt(userid));
         post.setTitle(title);
         post.setPosturl(image.getBytes());
         post.setCategory(category);
+        post.setHidden(hidden);
         return postRepo.save(post);
     }
     @GetMapping("/post/{postid}")

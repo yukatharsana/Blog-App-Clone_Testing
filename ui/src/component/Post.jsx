@@ -7,7 +7,6 @@ import { BolBImage } from './Util';
 export default function BigPost ({ postid })
 {
     const { title,description,posturl} = useSelector(state => postById(state, postid))
-  console.log(posturl.data);
   const navigate=useNavigate()
     return (
 

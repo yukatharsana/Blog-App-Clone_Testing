@@ -1,5 +1,8 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { getPost, addPost, updatePost, deletePost } from '../Thunk/PostThunk'
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { useMemo } from "react";
 
 const postAdepter = createEntityAdapter({
     selectId: (post) => post.postid
@@ -61,5 +64,15 @@ export const {
   selectIds:postIds,
   selectTotal: postcount
 } = postAdepter.getSelectors(state => state.post)
+export const PostsCat = () =>
+{
+  const [seach, setSearch] = useSearchParams();
+  const catgory=useMemo(()=>seach.get('cat'),[seach])
+  const Posts = useSelector(allPosts);
+  if (catgory === null)
+    return Posts.map(post=>post.postid);
+  else
+    return Posts.filter(post => post.category === catgory).map(post=>post.postid);
 
+}
 export default postSlice.reducer;
