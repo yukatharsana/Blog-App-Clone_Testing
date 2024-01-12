@@ -8,8 +8,8 @@ export default function Login ()
     e.preventDefault();
     try {
 const logindata = new FormData(e.currentTarget)
-const login = Object.fromEntries(logindata)
-      console.log(login);
+      const login = Object.fromEntries(logindata)
+      
     } catch (error) {
 
     }

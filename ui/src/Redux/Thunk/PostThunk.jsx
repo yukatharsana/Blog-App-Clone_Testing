@@ -17,9 +17,9 @@ export const getPost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   'delete/deletePost',
-  async (userid, { rejectWithValue }) => {
+  async (postid, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`${Base}/${userid}`)
+      const response = await axios.delete(`${Base}/${postid}`)
       return response.data
     } catch (error) {
       rejectWithValue(error.response.data)
@@ -29,12 +29,15 @@ export const deletePost = createAsyncThunk(
 
 export const updatePost = createAsyncThunk(
   'update/updatePost',
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(`${Base}`, data, {
-        headers: {
-          'Content-Type': 'multi-part/form-data'
-        }
+  async (data, { rejectWithValue }) =>
+  {
+    try
+    {
+      const response = await axios.put(Base, data,
+      {  headers: {
+        "Content-Type": 'multi-part/form-data',
+        "Access-Control-Allow-Origin": "*"
+      }
       })
       return response.data
     } catch (error) {
@@ -46,11 +49,11 @@ export const addPost = createAsyncThunk(
   'add/addPost',
   async (data, { rejectWithValue }) =>
   {
-    console.log(data);
     try {
       const response = await axios.post(`${Base}`, data, {
         headers: {
-          'Content-Type': 'multi-part/form-data'
+          "Access-Control-Allow-Origin": "*",
+          "CORS policy": "No"
         }
       })
       return response.data

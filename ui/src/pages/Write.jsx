@@ -1,8 +1,13 @@
 import React, { useCallback, useMemo, useReducer, useState } from 'react'
 import ReactQuill from 'react-quill'
-import { addPost } from '../Redux/Thunk/PostThunk'
+import { addPost, updatePost } from '../Redux/Thunk/PostThunk'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
+import { toast } from 'react-toastify'
+import { ErrorAlert, ScussAlert } from '../component/Util';
+
+
+//Reducer
 const reducer = (state, action) => {
   switch (action.type) {
     case 'DESC':
@@ -13,78 +18,103 @@ const reducer = (state, action) => {
       return { ...state, [action.payload.name]: action.payload.value }
     case 'CHOISE':
       return { ...state, hidden: Boolean(action.payload.value) }
+    case 'SET': return action.value;
     default:
       return state
   }
 }
-export default function Write () {
+
+
+
+
+//write Component
+export default function Write ()
+{
+  //variables
   const Dispatcher = useDispatch()
   const [value, setvalue] = useReducer(reducer, {})
   const [update, setUpdate] = useState(false);
-  const disabled = useMemo(() =>
-  {
-    if (!value?.title || !value?.imgurl || !value?.cat)
-      return true;
-    else
-      return false;
-  },[value])
-  const onPublished = useCallback(
-    e => {
+  const disabled = useMemo(() => {
+    if (!value?.title || !value?.imgurl || !value?.cat) return true
+    else return false
+  }, [value])
+
+  //functions
+
+
+  //Mouse Move on update btn
+  const OnMouseOverUpdate = () => {
+    if (disabled)
+      toast.error('important fields are Empty!', {
+        autoClose: 1500
+      })
+  }
+
+
+//visiblity box
+  const choiseBoxChange = useCallback(e => {
+    setvalue({ type: 'CHOISE', payload: e.target })
+    toast.info(`Your Post is Now ${e.target.value ? 'Private' : 'Public'}`, {
+      autoClose: 1500
+    })
+    setUpdate(true)
+  }, [])
+
+  //upload image
+  const uploadimage = useCallback(e => {
+    setvalue({ type: 'IMGUPD', value: e.target.files[0] })
+    toast.success('1 image uploaded', {
+      autoClose: 1500
+    })
+    setUpdate(true)
+  }, [])
+  //other inputs
+  const otherChnage = useCallback(e => {
+    setvalue({ type: 'OTHER', payload: e.target })
+    setUpdate(true)
+  }, [])
+
+
+  const onUpdate = useCallback(
+    async e => {
       e.preventDefault()
       try {
-// Dispatcher(addPost(value))
-
+        //await Dispatcher(updatePost(value))
+await ScussAlert({title:'Update',text:`Scussfully Updated ${value.title}`})
         setUpdate(false)
       } catch (error) {
-        console.error(error)
-      }
-    },
-    []
-  )
-  const OnMouseOverUpdate = () =>
-  {
-    if (disabled)
-  toast.error('important fields are Empty!', {
-    autoClose: 1500
-  })
-
-  }
-  const onSave = useCallback(
-    e => {
-      e.preventDefault()
-      try
-      {
-        toast.success("Saved Changes", {
-          autoClose:1500
-        })
-
-
-
-      } catch (error) {
+       ErrorAlert({title:"Update",text:error})
         console.error(error)
       }
     },
     [value]
   )
-  const choiseBoxChange = useCallback(e => {
-    setvalue({ type: 'CHOISE', payload: e.target })
-    toast.info(`Your Post is Now ${e.target.value ? "Private" : "Public"}`, {
-      autoClose:1500
-    })
-    setUpdate(true)
 
-  }, [])
-  const uploadimage = useCallback(e => {
-    setvalue({ type: 'IMGUPD', value: e.target.files[0] })
-    toast.success('1 image uploaded', {
-      autoClose:1500
-    })
-    setUpdate(true)
-  }, [])
-  const otherChnage = useCallback(e => {
-    setvalue({ type: 'OTHER', payload: e.target })
-    setUpdate(true)
-  }, [])
+
+
+  //Save Or Published
+const onSave = useCallback(
+  async e => {
+    e.preventDefault()
+    try {
+      await Dispatcher(addPost(value))
+
+      if (value.hidden)
+        await ScussAlert({title:'Saved',text:`Scussfully Saved ${value.title}`})
+      else
+        await ScussAlert({ title: 'Published', text: `Scussfully Published ${value.title}`
+ })
+
+    } catch (error) {
+      toast.error(error, {
+        autoClose: 1500
+      })
+      console.error(error)
+    }
+  },
+  [value]
+)
+
   return (
     <div className='writeadd'>
       <div className='content'>
@@ -105,7 +135,7 @@ export default function Write () {
             value={value?.description}
             onChange={val => {
               setvalue({ type: 'DESC', value: val })
-              setUpdate(true);
+              setUpdate(true)
             }}
           />
         </div>
@@ -114,7 +144,7 @@ export default function Write () {
         <div className='item'>
           <h1>Publish</h1>
           <span>
-            Status:<b>Draft</b>
+            Status:<b>{value.hidden ? 'Draft' : 'Post'}</b>
           </span>
           <span>
             Visibility:
@@ -136,8 +166,17 @@ export default function Write () {
             Upload Image
           </label>
           <div className='buttons'>
-            <button onClick={onSave} disabled={!update} >Save as A draft</button>
-            <button onClick={onPublished} onMouseOver={OnMouseOverUpdate} disabled = { disabled } >Update</button>
+            <button onClick={onSave} disabled={disabled}
+              onMouseOver={OnMouseOverUpdate}
+>
+              {value.hidden ? 'Save as A draft' : 'Published'}
+            </button>
+            <button
+              onClick={onUpdate}
+              disabled={!update}
+            >
+              Update
+            </button>
           </div>
         </div>
         <div className='item'>

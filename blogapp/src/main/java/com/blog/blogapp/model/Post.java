@@ -41,6 +41,4 @@ private String description;
 
     @Column(name="hidden",columnDefinition = "BOOLEAN DEFAULT true")
     private boolean hidden;
-    @Column(name="status",columnDefinition = "VARCHAR(30) DEFAULT 'Draft'")
-    private String status;
 }

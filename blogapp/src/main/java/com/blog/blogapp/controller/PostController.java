@@ -29,7 +29,7 @@ public class PostController {
                        @RequestPart("image")MultipartFile image,
                        @RequestPart("userid") String userid,
                        @RequestPart("cat") String category,
-    @RequestPart("hidden") boolean hidden
+    @RequestPart("hidden") String hidden
     ) throws IOException {
         Post post=new Post();
         post.setDescription(description);
@@ -37,7 +37,7 @@ public class PostController {
         post.setTitle(title);
         post.setPosturl(image.getBytes());
         post.setCategory(category);
-        post.setHidden(hidden);
+        post.setHidden(Boolean.parseBoolean(hidden));
         return postRepo.save(post);
     }
     @GetMapping("/post/{postid}")
@@ -52,6 +52,13 @@ public class PostController {
                     .orElseThrow(()->new ResourceNotfoundExp("Employee not exist with id"+postid));
             return ResponseEntity.ok(postdata);
         }
+        @DeleteMapping("/post/{postid}")
+    public int deletePost(@PathVariable int postid){
+        Post post=postRepo.findById(postid)
+                .orElseThrow(()->new RuntimeException("Post not exist with id"+postid));
+        postRepo.deleteById(postid);
+        return postid;
+    }
     }
 
 

@@ -9,7 +9,7 @@ export const store = configureStore({
         user: userSlice,
         post:postSlice
     },
-    middleware:()=>new Tuple(thunk)
+    middleware:()=>new Tuple(thunk,logger)
 
 }
 );

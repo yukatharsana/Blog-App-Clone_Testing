@@ -10,7 +10,12 @@ export const userSlice = createSlice({
     loading: false,
     error: ''
   }),
-  reducers: {},
+  reducers: {
+    login: (state, action) =>
+    {
+      console.log(state);
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(getUser.pending, (state, action) => {

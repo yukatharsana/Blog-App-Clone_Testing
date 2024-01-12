@@ -11,7 +11,7 @@ try {
 } catch (error)
 {
   console.error(error);
-    rejectWithValue(error.response.data);
+    rejectWithValue(error);
 }
 })
 
@@ -22,7 +22,7 @@ export const deleteUser = createAsyncThunk(
       const response = await axios.delete(`${Base}/${userid}`)
         return response.data;
     } catch (error) {
-      rejectWithValue(error.response.data)
+      rejectWithValue(error)
     }
   }
 )
@@ -38,22 +38,22 @@ export const updateUser = createAsyncThunk(
       })
       return response.data
     } catch (error) {
-      rejectWithValue(error.response.data)
+      rejectWithValue(error)
     }
   }
 )
 export const addUser = createAsyncThunk(
   'add/addUser',
   async (data, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(Base, data,{
-        headers: {
-          'Content-Type': 'multi-part/form-data'
-        }
-      })
+    try
+    {
+      console.log(Object.fromEntries(data));
+      const response = await axios.post(Base, data)
+      console.log(response.data);
       return response.data
-    } catch (error) {
-      rejectWithValue(error.response.data)
+    } catch (error)
+    {
+      console.log(error);
     }
   }
 )
