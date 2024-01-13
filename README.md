@@ -43,7 +43,7 @@ Discuss the backend architecture, key components, and any important concepts. In
 
 ## Frontend Development
 
-![Frontend Development](./images/frontend-development.png)
+![Frontend Development](./Util/Frontendstucture.png)
 
 Explain the structure of the React.js application, how Redux is integrated, and provide code examples for crucial components and actions.
 
@@ -58,11 +58,6 @@ Explain how the frontend communicates with the backend, showcasing any relevant 
 ![Testng3](./Util/Screenshot%202024-01-13%20044539.png)
 Discuss how to test different functionalities of your Blog App. Include information on testing frameworks or tools used.
 
-## Deployment
-
-![Deployment](./images/deployment.png)
-
-Guide users on deploying the Spring Boot and React.js application. Discuss considerations for hosting and deploying the app.
 
 ## Contributions
 
