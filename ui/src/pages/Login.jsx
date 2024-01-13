@@ -1,13 +1,16 @@
 import React, { useCallback } from 'react'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { allUser } from '../Redux/Slice/UserSlice';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { useAppContext } from '../context/AppContext';
 
 
 export default function Login ()
 {
+  const { setLogin, setAuth,login } = useAppContext();
+  const navigate = useNavigate();
   const users=useSelector(allUser)
   const onsubmit = useCallback(e=>
   {
@@ -16,14 +19,23 @@ export default function Login ()
 const logindata = new FormData(e.currentTarget)
       const login = Object.fromEntries(logindata);
       const userd = users.find(use => use.name === login.username || use.email === login.email)
-      console.log(userd);
       if (!userd)
         toast.error("invalid Username or password!");
       else
       {
         if (userd.password === login.password)
         {
-          localStorage.setItem('user', userd.userid);
+          sessionStorage.setItem('user', userd.userid);
+          Swal.fire({
+            title: "Login SuccessFully",
+            showConfirmButton: false,
+            timer: 1700,
+            icon:"success"
+          })
+          setLogin(true);
+          setAuth(userd.userid);
+          navigate("/");
+
         } else
         {
           Swal.fire({
@@ -42,7 +54,7 @@ const logindata = new FormData(e.currentTarget)
     }
 
   },[users])
-  return (
+  return login ? (<Navigate to='/' replace={ true } />) : (
     <div className='auth'>
       <h1>Login</h1>
       <form onSubmit={onsubmit}>

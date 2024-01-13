@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -15,16 +15,19 @@ import { store } from './Redux/Store'
 import { ToastContainer } from 'react-toastify'
 import { getPost } from './Redux/Thunk/PostThunk'
 import { getUser } from './Redux/Thunk/UserThunk'
+import AppContextProvider, { useAppContext } from './context/AppContext';
 store.dispatch(getPost())
 store.dispatch(getUser())
-const Layout = () => {
-  return (
+const Layout = () =>
+{
+  const { login} = useAppContext();
+  return login? (
     <>
       <NavBar />
       <Outlet />
       <Footer />
     </>
-  )
+  ) : (<Navigate to='/login' replace={ true} />)
 }
 const router = createBrowserRouter([
   {
@@ -60,13 +63,13 @@ export default function App () {
     <Provider store={store}>
 
 
-
+<AppContextProvider>
       <div className='app'> <ToastContainer draggable={true } />
         <div className='container'>
           <RouterProvider router={router} />
         </div>
         </div>
-
+</AppContextProvider>
     </Provider>
   )
 }
