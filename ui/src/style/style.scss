@@ -1,7 +1,9 @@
 $ligthcolor:#dfc863;
 $verylight :#c1af55c1;
 $darkcolor :#af8920;
-
+*{
+    transition: all 1s;
+}
 .app {
     display        : flex;
     justify-content: center;

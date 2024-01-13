@@ -50,14 +50,17 @@ export const addPost = createAsyncThunk(
   async (data, { rejectWithValue }) =>
   {
     try {
-      const response = await axios.post(`${Base}`, data, {
+      const response = await axios.post(Base, data, {
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "CORS policy": "No"
+          "Content-Type": "application/form-data",
+          "Accept": "*/*"
         }
       })
       return response.data
-    } catch (error) {
+    } catch (error)
+    {
+      console.error(error);
       rejectWithValue(error.response.data)
     }
   }

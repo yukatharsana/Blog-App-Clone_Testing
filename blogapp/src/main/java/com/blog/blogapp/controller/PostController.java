@@ -26,7 +26,7 @@ public class PostController {
     @PostMapping(value = "/post",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Post addNew(@RequestPart("title") String title,
                        @RequestPart("description") String description,
-                       @RequestPart("image")MultipartFile image,
+                       @RequestPart("imgurl")MultipartFile image,
                        @RequestPart("userid") String userid,
                        @RequestPart("cat") String category,
     @RequestPart("hidden") String hidden
@@ -38,6 +38,7 @@ public class PostController {
         post.setPosturl(image.getBytes());
         post.setCategory(category);
         post.setHidden(Boolean.parseBoolean(hidden));
+        System.out.println(post.getTitle());
         return postRepo.save(post);
     }
     @GetMapping("/post/{postid}")

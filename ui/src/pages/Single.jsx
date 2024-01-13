@@ -44,7 +44,7 @@ export default function Single ()
       }
   }, [Dispatcher, postid])
 
-  const { posturl, title, description, createdAt, userid } =
+  const { posturl, title, description, createdAt, userid,category } =
     useSelector(state => postById(state, postid)) ?? {};
   const {name,profile}=useSelector(state=>userById(state,userid))??{}
   return (
@@ -70,7 +70,7 @@ export default function Single ()
         <h1>{title}</h1>
         <p>{description}</p>
       </div>
-      <Menu />
+      <Menu cat={category} />
     </div>
   )
 }

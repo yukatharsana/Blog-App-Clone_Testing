@@ -32,7 +32,7 @@ export default function Write ()
 {
   //variables
   const Dispatcher = useDispatch()
-  const [value, setvalue] = useReducer(reducer, {})
+  const [value, setvalue] = useReducer(reducer, {userid:106,hidden:true})
   const [update, setUpdate] = useState(false);
   const disabled = useMemo(() => {
     if (!value?.title || !value?.imgurl || !value?.cat) return true
@@ -96,8 +96,17 @@ await ScussAlert({title:'Update',text:`Scussfully Updated ${value.title}`})
 const onSave = useCallback(
   async e => {
     e.preventDefault()
-    try {
-      await Dispatcher(addPost(value))
+    try
+    {
+      const formData = new FormData()
+console.log(value);
+for (const key in value) {
+  if (value.hasOwnProperty(key)) {
+    formData.append(key, value[key])
+  }
+}
+
+      await Dispatcher(addPost(formData))
 
       if (value.hidden)
         await ScussAlert({title:'Saved',text:`Scussfully Saved ${value.title}`})
@@ -124,8 +133,7 @@ const onSave = useCallback(
           id='Title'
           placeholder='Title'
           required
-          autoFocus
-          value={value?.title}
+          value={value?.title??''}
           onChange={otherChnage}
         />
         <div className='editorContainer'>
@@ -149,9 +157,9 @@ const onSave = useCallback(
           <span>
             Visibility:
             <b>
-              <select name='visible' onChange={choiseBoxChange}>
+              <select name='visible' onChange={choiseBoxChange} defaultValue='true'>
                 <option value='false'>Public</option>
-                <option value='true'>Private</option>
+                <option value='true' >Private</option>
               </select>
             </b>
           </span>
