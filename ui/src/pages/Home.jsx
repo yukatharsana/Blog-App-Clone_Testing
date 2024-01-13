@@ -1,8 +1,7 @@
 import React from 'react'
 
 import Post from '../component/Post';
-import { useSelector } from 'react-redux';
-import {postIds,PostsCat} from '../Redux/Slice/PostSlice';
+import {PostsCat} from '../Redux/Slice/PostSlice';
 export default function Home ()
 {
 

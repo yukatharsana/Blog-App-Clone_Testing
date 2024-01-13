@@ -33,6 +33,7 @@ public class UserController {
         user.setEmail(email);
         user.setName(name);
         user.setProfile(profile.getBytes());
+        System.out.println("Hi");
         return ResponseEntity.ok(userRepo.save(user));
     }
     @GetMapping("/user/{userid}")

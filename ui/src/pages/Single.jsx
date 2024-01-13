@@ -68,7 +68,8 @@ export default function Single ()
           </div>
         </div>
         <h1>{title}</h1>
-        <p>{description}</p>
+       <div dangerouslySetInnerHTML={{ __html: description }} />
+
       </div>
       <Menu cat={category} />
     </div>

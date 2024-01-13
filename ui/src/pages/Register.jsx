@@ -1,40 +1,50 @@
-import React, { useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { addUser } from '../Redux/Thunk/UserThunk'
 import { useDispatch } from 'react-redux'
 import { FaUser } from 'react-icons/fa'
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+import { toast } from 'react-toastify'
 
 export default function Register () {
   const disatcher = useDispatch()
-  const [err, seterr] = useState('')
-  const onsubmit = useCallback(async e => {
-    e.preventDefault()
-    try {
+  const navigate = useNavigate()
+  const onsubmit = useCallback(
+    async e => {
+      e.preventDefault()
       const registerdata = new FormData(e.currentTarget)
-      const register = Object.fromEntries(registerdata)
-    disatcher(addUser(registerdata))
-      Swal.fire({
-        title: "Login",
-        icon: "success",
-        text: 'Login SucessFully',
-        timer:1200
-      })
-    } catch (error) {
-      console.log(error)
-      seterr(error)
-    }
-  }, [disatcher])
+      const verif = await verify(registerdata)
+
+      try {
+        if (verif)
+        {
+          alert("dfdfdf")
+          disatcher(addUser(registerdata))
+          Swal.fire({
+            title: 'Register',
+            icon: 'success',
+            text: 'Register SucessFully',
+            showConfirmButton: false,
+            timer: 1200
+          })
+          navigate('/login')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [disatcher,navigate]
+  )
 
   return (
     <div className='auth'>
       <h1>Register</h1>
-      <form onSubmit={onsubmit} encType ='multipart/form-data'>
+      <form onSubmit={onsubmit}>
         <label className='profile' htmlFor='profile'>
           <FaUser />
         </label>
 
-        <input type='text' placeholder='username' name='username' id='user' />
+        <input type='text' placeholder='username' name='name' id='user' />
         <input type='email' placeholder='email' name='email' id='email' />
         <input
           type='password'
@@ -50,8 +60,7 @@ export default function Register () {
           name='profile'
         />
 
-        <button type='submit' >Register</button>
-        <p> {err}</p>
+        <button type='submit'>Register</button>
         <span>
           Do you have an account?{' '}
           <Link to='/login' className='action link'>
@@ -61,4 +70,24 @@ export default function Register () {
       </form>
     </div>
   )
+}
+
+async function verify (formadata) {
+  const data = Object.fromEntries(formadata)
+
+  if (!data?.name) toast.warning('username is Requied')
+  if (!data?.password) toast.warning('password is Requied')
+  if (!data?.email) toast.warning('email is Requied')
+  if (!data?.profile) toast.warning('Profile is Requied')
+  if (!data?.name || !data?.profile || !data?.email || !data?.password) {
+    Swal.fire({
+      title: 'Register',
+      icon: 'error',
+      text: 'Please check Your inputs',
+      confirmButtonColor: '#af8920'
+    })
+    return false
+  } else {
+    return true
+  }
 }
