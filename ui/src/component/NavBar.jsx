@@ -4,11 +4,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext';
 import { useSelector } from 'react-redux';
 import { userById } from '../Redux/Slice/UserSlice';
+import Swal from 'sweetalert2';
 export default function NavBar ()
 {
   const navref = useRef(null);
   const navigate = useNavigate();
-  const { auth } = useAppContext();
+  const { auth,setLogin } = useAppContext();
   const {name}=useSelector(state=>userById(state,auth))??{}
   useEffect(() =>
   {
@@ -28,7 +29,25 @@ return () => {
 }
 
 },[])
+  const Logout = async () =>
+  {
 
+Swal.fire({
+  title: 'Logout',
+  icon: 'question',
+  text: 'Do you want to Logout?',
+  showCancelButton: true,
+  confirmButtonText: 'Yes'
+}).then(result => {
+  if (result.isConfirmed)
+  {
+    setLogin(false);
+    sessionStorage.removeItem("user");
+    navigate('/login')
+  }
+})
+
+}
   return (
     <div
  className='navbar' ref={navref}>
@@ -59,7 +78,7 @@ return () => {
           </Link>
           <span onClick={()=>navigate("/profile/"+auth)}>
             {name}</span>
-          <span>LogOut</span>
+          <span onClick={()=>Logout()}>LogOut</span>
           <span className='write'>
             <Link to='/write' className='link'>Write</Link>
           </span>

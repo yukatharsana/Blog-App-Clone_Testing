@@ -1,13 +1,15 @@
 $ligthcolor:#dfc863;
 $verylight :#c1af55c1;
 $darkcolor :#af8920;
-*{
+
+* {
     transition: all 1s;
 }
+
 .app {
     display        : flex;
     justify-content: center;
-    transition: ease-in-out .5s;
+    transition     : ease-in-out .5s;
 
     .link {
         text-decoration: none;
@@ -47,14 +49,16 @@ $darkcolor :#af8920;
                 border-radius   : 12px;
                 border          : 1px ridge $darkcolor;
                 position        : relative;
-.profile{
-    position: absolute;
-    right: 150px;
-    top: 0px;
-    font-size: 20px;
-    color: $darkcolor;
-    cursor: pointer;
-}
+
+                .profileicon {
+                    position : absolute;
+                    right    : 150px;
+                    top      : 0px;
+                    font-size: 20px;
+                    color    : $darkcolor;
+                    cursor   : pointer;
+                }
+
                 &::after {
                     content         : "";
                     position        : absolute;
@@ -225,6 +229,7 @@ $darkcolor :#af8920;
     //Home
     .home {
         min-height: 100vh;
+
         .posts {
             margin-top    : 50px;
             display       : flex;
@@ -258,7 +263,7 @@ $darkcolor :#af8920;
 
                     img {
                         width        : 100%;
-                        height: 100%;
+                        height       : 100%;
                         object-fit   : cover;
                         border-radius: inherit;
                     }
@@ -269,7 +274,7 @@ $darkcolor :#af8920;
                     display        : flex;
                     flex-direction : column;
                     justify-content: space-between;
-                    transition: ease-in-out 1s;
+                    transition     : ease-in-out 1s;
 
                     h1 {
                         font-size: 48px;
@@ -421,55 +426,106 @@ $darkcolor :#af8920;
             }
         }
     }
-.profile{
-    width: 100%;
-    min-height:100vh;
-    .posts{
-        width: 100%;
-        display: flex;
-       gap:20px;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        .post {
-            width: 20%;
-            margin-top: 10px;
-            padding-bottom: 5px;
-    display       : flex;
-    flex-direction: column;
-    box-shadow: #555 1.5px 1.5px 1.5px;
 
-    img {
-        width        : 100%;
-        height       : 200px;
-        object-fit   : cover;
-        border-radius: 4px;
-    }
+    .profile {
+        width     : 100%;
+        min-height: 100vh;
 
-    h2 {
-        color: #555;
-        text-align: center;
-    }
+        .editbtn {
+            font-size    : 25px;
+            border-radius: 40%;
+            padding      : 15px;
+            cursor       : pointer;
 
-    button {
-        cursor          : pointer;
-        padding         : 8px 15px;
-        margin: 2px auto;
-        border          : none;
-        width           : max-content;
-        background-color: #fff;
-        border          : 1px solid $darkcolor;
-        color           : $darkcolor;
-        font-weight     : 500;
+            &:hover {
+                background-color: $darkcolor;
+                color           : #fff;
+            }
+        }
 
-        &:hover {
-            border-color    : #fff;
-            color           : #000;
-            background-color: $ligthcolor;
+        .userdetails {
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+            height         : 60vh;
+
+            div {
+                height       : 90%;
+                width        : 40%;
+                border-radius: 20%;
+                box-shadow   : $darkcolor 1px 1px 1px,
+                    1px 1px 1px,
+                    1px 1px 1px 1px,
+                    1px 1px 1px;
+                padding   : 10px;
+                text-align: center;
+
+                h3 {
+                    color: #282828;
+                }
+
+                img {
+                    border-radius: 45%;
+                    width        : 150px;
+                    height       : 150px;
+                }
+            }
+
+        }
+
+        .posts {
+            margin-top     : 20px;
+            width          : 100%;
+            display        : flex;
+            gap            : 20px;
+            flex-wrap      : wrap;
+            justify-content: space-around;
+            div{
+                width: 20%;
+                height: max-content;
+            }
+
+            .post {
+                width         : 100%;
+                margin-top    : 10px;
+                padding-bottom: 15px;
+                display       : flex;
+                flex-direction: column;
+                box-shadow    : #555 1.5px 1.5px 1.5px;
+
+                img {
+                    width        : 100%;
+                    height       : 200px;
+                    object-fit   : cover;
+                    border-radius: 4px;
+                }
+
+                h2 {
+                    color     : #555;
+                    text-align: center;
+                }
+
+                button {
+                    cursor          : pointer;
+                    padding         : 8px 15px;
+                    margin          : 2px auto;
+                    border          : none;
+                    width           : max-content;
+                    background-color: #fff;
+                    border          : 1px solid $darkcolor;
+                    color           : $darkcolor;
+                    font-weight     : 500;
+
+                    &:hover {
+                        border-color    : #fff;
+                        color           : #000;
+                        background-color: $ligthcolor;
+                    }
+                }
+            }
         }
     }
-}
-    }
-}
+
     //write
     .writeadd {
         margin-top: 20px;

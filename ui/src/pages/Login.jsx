@@ -61,7 +61,6 @@ const logindata = new FormData(e.currentTarget)
         <input type='text' placeholder='username' name='username' id='user' autoFocus required/>
         <input type='password' required name='password' placeholder='password' id='password' />
         <button type='submit'>Login</button>
-        <p>Error !</p>
         <span>Don't you have an account? <Link to='/register' className='action link'>Register</Link></span>
       </form>
     </div>

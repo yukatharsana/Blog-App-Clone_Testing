@@ -40,7 +40,7 @@ export default function Register () {
     <div className='auth'>
       <h1>Register</h1>
       <form onSubmit={onsubmit}>
-        <label className='profile' htmlFor='profile'>
+        <label className='profileicon' htmlFor='profile'>
           <FaUser />
         </label>
 
