@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { postById } from '../Redux/Slice/PostSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { BolBImage } from './Util';
-import ReactHtmlParser from 'react-html-parser'
 
 export default function BigPost ({ postid })
 {
@@ -20,7 +19,7 @@ export default function BigPost ({ postid })
     <Link className='link' to={`/post/${postid}`}>
       <h1>{title}</h1>
     </Link>
-    <p>{description}</p>
+    <div dangerouslySetInnerHTML={{ __html: description }}/>
     <button onClick={()=>navigate(`/post/${postid}`)} >Read More</button>
   </div>
 </div>

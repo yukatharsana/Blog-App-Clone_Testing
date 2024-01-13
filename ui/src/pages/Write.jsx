@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 import { ErrorAlert, ScussAlert } from '../component/Util';
+import { useNavigate } from 'react-router-dom';
 
 
 //Reducer
@@ -32,6 +33,7 @@ export default function Write ()
 {
   //variables
   const Dispatcher = useDispatch()
+  const naviga=useNavigate()
   const [value, setvalue] = useReducer(reducer, {userid:106,hidden:true})
   const [update, setUpdate] = useState(false);
   const disabled = useMemo(() => {
@@ -66,6 +68,7 @@ export default function Write ()
     toast.success('1 image uploaded', {
       autoClose: 1500
     })
+
     setUpdate(true)
   }, [])
   //other inputs
@@ -99,7 +102,7 @@ const onSave = useCallback(
     try
     {
       const formData = new FormData()
-console.log(value);
+
 for (const key in value) {
   if (value.hasOwnProperty(key)) {
     formData.append(key, value[key])
@@ -112,7 +115,8 @@ for (const key in value) {
         await ScussAlert({title:'Saved',text:`Scussfully Saved ${value.title}`})
       else
         await ScussAlert({ title: 'Published', text: `Scussfully Published ${value.title}`
- })
+        })
+      naviga("/")
 
     } catch (error) {
       toast.error(error, {
