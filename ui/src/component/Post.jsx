@@ -29,11 +29,12 @@ export default function BigPost ({ postid })
 export function SmallPost ({ postid })
 {
   const { posturl, title } = useSelector(state => postById(state, postid)) ?? {};
+  const navi = useNavigate();
   return (
     <div className='post' key={postid}>
       <BolBImage url={posturl} alt={title } />
   <h2>{title}</h2>
-  <button>Read More</button>
+  <button onClick={()=>navi(`/post/${postid}`)}>Read More</button>
 </div>
 
   )
