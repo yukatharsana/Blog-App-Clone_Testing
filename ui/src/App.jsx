@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify'
 import { getPost } from './Redux/Thunk/PostThunk'
 import { getUser } from './Redux/Thunk/UserThunk'
 import AppContextProvider, { useAppContext } from './context/AppContext';
+import Profile from './pages/Profile';
 store.dispatch(getPost())
 store.dispatch(getUser())
 const Layout = () =>
@@ -45,6 +46,9 @@ const router = createBrowserRouter([
       {
         path: '/write',
         element: <Write />
+      }, {
+        path: "/profile/:userid",
+        element:<Profile/>
       }
     ]
   },

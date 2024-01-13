@@ -82,4 +82,11 @@ export const FilterPost = (category) =>
   return Posts.filter(post => post.category === category).map(post => post.postid)
 
 }
+export const UsersPost = (userid) =>
+{
+  const Posts = useSelector(allPosts);
+  return Posts.filter(post => post.userid === parseInt(userid)).map(post => post.postid)
+
+
+}
 export default postSlice.reducer;
